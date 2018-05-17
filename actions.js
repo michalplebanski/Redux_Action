@@ -1,16 +1,18 @@
-const ADD_COMMENT = 'ADD COMMENT';
-const EDIT_COMMENT = 'EDIT COMMENT';
-const DELETE_COMMENT = 'DELETE COMMENT';
-const THUMB_UP = 'THUMB UP';
-const THUMB_DOWN = 'THUMB DOWN';
+import uuid from "uuid";
+
+const ADD_COMMENT = "ADD COMMENT";
+const EDIT_COMMENT = "EDIT COMMENT";
+const DELETE_COMMENT = "DELETE COMMENT";
+const THUMB_UP = "THUMB UP";
+const THUMB_DOWN = "THUMB DOWN";
 
 // ADD COMMENT
 const addComment = text => {
 	return {
 		type: ADD_COMMENT,
-		text: 'add comment',
-		id: uuid.v4()
-	}
+		id: uuid.v4(),
+		text
+	};
 };
 const boundAddComment = text => dispatch(addComment(text));
 
@@ -18,40 +20,35 @@ const boundAddComment = text => dispatch(addComment(text));
 const editComment = (text, id) => {
 	return {
 		type: EDIT_COMMENT,
-		text: 'edit comment',
-		id: uuid.v4()
-	}
+		id,
+		text
+	};
 };
-const boundEditComment = (text, id) => dispatch(editComment(text. id));
+const boundEditComment = (text, id) => dispatch(editComment(text, id));
 
 //DELETE COMMENT
-const deleteComment = (text, id) => {
+const deleteComment = id => {
 	return {
 		type: DELETE_COMMENT,
-		text: 'delete comment',
-		id: uuid.v4()
-	}
+		id
+	};
 };
-const boundDeleteComment = (text, id) => dispatch(deleteComment(text, id));
+const boundDeleteComment = id => dispatch(deleteComment(id));
 
 //THUMB UP
-const thumbUp = (id, likes) => {
+const thumbUp = id => {
 	return {
-		type: THUMB UP,
-		text: 'thumb up',
-		id: uuid.v4(),
-		likes: ++likes
-	}
+		type: THUMB_UP,
+		id
+	};
 };
-const boundThumbUp = (id, likes) => dispatch(thumbUp(id, likes));
+const boundThumbUp = id => dispatch(thumbUp(id));
 
 //THUMB DOWN
-const thumbDown = (id, dislikes) => {
+const thumbDown = id => {
 	return {
-		type: THUMB DOWN,
-		text: 'thumb down',
-		id: uuid.v4(),
-		dislikes: --dislikes
-	}
+		type: THUMB_DOWN,
+		id
+	};
 };
-const boundThumbDown = (id, dislikes) => dispatch(thumbDown(id, likes));
+const boundThumbDown = id => dispatch(thumbDown(id));
